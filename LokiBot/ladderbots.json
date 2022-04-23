@@ -1,0 +1,10 @@
+{
+  "Bots": {
+    "LokiBot": {
+      "Race": "Terran",
+      "Type": "dotnetcore",
+      "RootPath": "./",
+      "FileName": "LokiBot.dll"
+    }
+  }
+}
