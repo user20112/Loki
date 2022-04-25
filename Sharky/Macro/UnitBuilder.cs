@@ -16,7 +16,7 @@ namespace Sharky.Macro
         private UnitCountService UnitCountService;
         private IBuildingPlacement WarpInPlacement;
 
-        public UnitBuilder(Sharky.LokiBot.LokiBot lokiBot, IBuildingPlacement warpInPlacement)
+        public UnitBuilder(Sharky.LokiBot.BaseLokiBot lokiBot, IBuildingPlacement warpInPlacement)
         {
             MacroData = lokiBot.MacroData;
             ActiveUnitData = lokiBot.ActiveUnitData;

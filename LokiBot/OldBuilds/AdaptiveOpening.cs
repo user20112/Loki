@@ -9,7 +9,7 @@ namespace LokiBot.Builds
     {
         private EnemyData EnemyData;
 
-        public AdaptiveOpening(Sharky.LokiBot.LokiBot lokiBot) : base(lokiBot)
+        public AdaptiveOpening(Sharky.LokiBot.BaseLokiBot lokiBot) : base(lokiBot)
         {
             EnemyData = lokiBot.EnemyData;
         }

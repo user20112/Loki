@@ -10,7 +10,7 @@ namespace Sharky.MicroControllers.Zerg
     {
         private int lastBileFrame = 0;
 
-        public RavagerMicroController(LokiBot.LokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled)
+        public RavagerMicroController(LokiBot.BaseLokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled)
             : base(lokiBot, sharkyPathFinder, microPriority, groupUpEnabled)
         {
         }

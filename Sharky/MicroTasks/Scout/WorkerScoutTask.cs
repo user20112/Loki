@@ -19,7 +19,7 @@ namespace Sharky.MicroTasks
         private SharkyUnitData SharkyUnitData;
         private TargetingData TargetingData;
 
-        public WorkerScoutTask(Sharky.LokiBot.LokiBot lokiBot, bool enabled, float priority)
+        public WorkerScoutTask(Sharky.LokiBot.BaseLokiBot lokiBot, bool enabled, float priority)
         {
             SharkyUnitData = lokiBot.SharkyUnitData;
             TargetingData = lokiBot.TargetingData;
@@ -73,7 +73,7 @@ namespace Sharky.MicroTasks
 
             if (ScoutPoints == null)
             {
-                ScoutPoints = AreaService.GetTargetArea(TargetingData.EnemyMainBasePoint);
+                ScoutPoints = AreaService.GetTargetArea(TargetingData.EnemyMainBasePoint, 5);
                 ScoutPoints.Add(BaseData.EnemyBaseLocations.Skip(1).First().Location);
                 var ramp = TargetingData.ChokePoints.Bad.FirstOrDefault();
                 if (ramp != null)

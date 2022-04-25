@@ -10,7 +10,7 @@ namespace Sharky.Macro
         private MacroData MacroData;
         private SharkyUnitData SharkyUnitData;
 
-        public UpgradeResearcher(Sharky.LokiBot.LokiBot lokiBot)
+        public UpgradeResearcher(Sharky.LokiBot.BaseLokiBot lokiBot)
         {
             MacroData = lokiBot.MacroData;
             ActiveUnitData = lokiBot.ActiveUnitData;

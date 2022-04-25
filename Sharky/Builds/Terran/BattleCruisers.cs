@@ -4,7 +4,7 @@ namespace Sharky.Builds.Terran
 {
     public class BattleCruisers : TerranSharkyBuild
     {
-        public BattleCruisers(Sharky.LokiBot.LokiBot lokiBot) : base(lokiBot)
+        public BattleCruisers(Sharky.LokiBot.BaseLokiBot lokiBot) : base(lokiBot)
         {
         }
 

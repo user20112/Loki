@@ -8,7 +8,7 @@ namespace Sharky.MicroControllers.Zerg
 {
     public class SwarmHostMicroController : IndividualMicroController
     {
-        public SwarmHostMicroController(LokiBot.LokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled)
+        public SwarmHostMicroController(LokiBot.BaseLokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled)
             : base(lokiBot, sharkyPathFinder, microPriority, groupUpEnabled)
         {
         }

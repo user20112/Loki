@@ -10,7 +10,7 @@ namespace LokiBot.Builds
 {
     public abstract class BaseBuild : TerranSharkyBuild
     {
-        public BaseBuild(Sharky.LokiBot.LokiBot bot) : base(bot)
+        public BaseBuild(Sharky.LokiBot.BaseLokiBot bot) : base(bot)
         {
         }
 
@@ -472,10 +472,10 @@ namespace LokiBot.Builds
                 return;
             Task.Run(() =>
             {
-                while (UnitCountService.BuildingsDoneAndInProgressCount(UnitTypes.TERRAN_SUPPLYDEPOT) != Desired)
+                while (UnitCountService.BuildingsDoneAndInProgressCount(UnitTypes.TERRAN_SUPPLYDEPOT) + UnitCountService.BuildingsDoneAndInProgressCount(UnitTypes.TERRAN_SUPPLYDEPOTLOWERED) != Desired)
                     Thread.Sleep(50);
                 StartedCallBack?.Invoke(null);
-                while (UnitCountService.Completed(UnitTypes.TERRAN_SUPPLYDEPOT) != Desired)
+                while (UnitCountService.Completed(UnitTypes.TERRAN_SUPPLYDEPOT) + UnitCountService.Completed(UnitTypes.TERRAN_SUPPLYDEPOTLOWERED) != Desired)
                     Thread.Sleep(50);
                 BuiltCallBack?.Invoke(null);
             });

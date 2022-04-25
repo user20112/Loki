@@ -8,7 +8,7 @@ namespace Sharky.MicroControllers.Protoss
 {
     public class CarrierMicroController : IndividualMicroController
     {
-        public CarrierMicroController(LokiBot.LokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled)
+        public CarrierMicroController(LokiBot.BaseLokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled)
             : base(lokiBot, sharkyPathFinder, microPriority, groupUpEnabled)
         {
         }

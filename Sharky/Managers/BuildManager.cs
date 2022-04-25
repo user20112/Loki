@@ -31,7 +31,7 @@ namespace Sharky.Managers
         protected SharkyOptions SharkyOptions;
         protected SimCityService SimCityService;
 
-        public BuildManager(Sharky.LokiBot.LokiBot lokiBot)
+        public BuildManager(Sharky.LokiBot.BaseLokiBot lokiBot)
         {
             BuildChoices = lokiBot.BuildChoices;
             DebugService = lokiBot.DebugService;

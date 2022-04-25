@@ -7,7 +7,7 @@ namespace Sharky.MicroControllers.Zerg
 {
     public class InfestorBurrowedMicroController : IndividualMicroController
     {
-        public InfestorBurrowedMicroController(LokiBot.LokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled)
+        public InfestorBurrowedMicroController(LokiBot.BaseLokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled)
             : base(lokiBot, sharkyPathFinder, microPriority, groupUpEnabled)
         {
         }

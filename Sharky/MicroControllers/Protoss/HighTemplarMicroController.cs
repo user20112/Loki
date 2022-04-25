@@ -16,7 +16,7 @@ namespace Sharky.MicroControllers.Protoss
         private double StormRadius = 1.5;
         private int StormRangeSquared = 82;
 
-        public HighTemplarMicroController(Sharky.LokiBot.LokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled)
+        public HighTemplarMicroController(Sharky.LokiBot.BaseLokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled)
             : base(lokiBot, sharkyPathFinder, microPriority, groupUpEnabled)
         {
         }

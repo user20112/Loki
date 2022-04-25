@@ -239,5 +239,27 @@ namespace Sharky.Builds.MacroServices
 
             return commands;
         }
+
+        internal IEnumerable<Action> ResumePausedBuilds()
+        {
+            var commands = new List<Action>();
+
+            if (lastFailFrame < MacroData.Frame - 100)
+            {
+                foreach (var proxy in MacroData.Proxies.Where(p => p.Value.Enabled))
+                {
+                    foreach (KeyValuePair<ulong, UnitCommander> structure in ActiveUnitData.Commanders.Where(u => u.Value.UnitCalculation.UnitClassifications.Contains(UnitClassification.DefensiveStructure) || u.Value.UnitCalculation.UnitClassifications.Contains(UnitClassification.ProductionStructure)))
+                    {
+                        if (!(structure.Value.UnitCalculation.Unit.CargoSpaceTaken > 0))
+                        {
+                            //erm the workers dead..
+                            BuildingBuilder.ResumeStructure(structure, MacroData);
+                        }
+                    }
+                }
+            }
+
+            return commands;
+        }
     }
 }

@@ -12,7 +12,7 @@ namespace Sharky.MicroControllers.Protoss
         private float RevelationRadius = 6;
         private float RevelationRange = 9;
 
-        public OracleMicroController(Sharky.LokiBot.LokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled, float avoidDamageDistance = .5f)
+        public OracleMicroController(Sharky.LokiBot.BaseLokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled, float avoidDamageDistance = .5f)
             : base(lokiBot, sharkyPathFinder, microPriority, groupUpEnabled, avoidDamageDistance)
         {
         }

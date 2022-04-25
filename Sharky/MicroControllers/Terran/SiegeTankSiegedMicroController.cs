@@ -11,7 +11,7 @@ namespace Sharky.MicroControllers.Terran
     {
         private int LastUnseigeFrame;
 
-        public SiegeTankSiegedMicroController(LokiBot.LokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled)
+        public SiegeTankSiegedMicroController(LokiBot.BaseLokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled)
             : base(lokiBot, sharkyPathFinder, microPriority, groupUpEnabled)
         {
             LastUnseigeFrame = 0;

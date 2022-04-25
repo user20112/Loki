@@ -1,15 +1,18 @@
 ﻿using LokiBot.Builds;
 using SC2APIProtocol;
 using Sharky;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace LokiBot.BuildSequences
 {
     public class FastExpandProtossResponseSequence : BaseBuild
     {
+        private bool BuiltAttackForce;
         private bool SequenceDone = false;
 
-        public FastExpandProtossResponseSequence(Sharky.LokiBot.LokiBot bot) : base(bot)
+        public FastExpandProtossResponseSequence(Sharky.LokiBot.BaseLokiBot bot) : base(bot)
         {
         }
 
@@ -38,6 +41,26 @@ namespace LokiBot.BuildSequences
         public override void OnFrame(ResponseObservation observation)
         {
             base.OnFrame(observation);
+            if (BuiltAttackForce)
+            {
+                foreach (var unit in ActiveUnitData.Commanders.Where(c => !c.Value.UnitCalculation.Attributes.Contains(SC2APIProtocol.Attribute.Structure)))
+                {
+                    if (unit.Value.UnitCalculation.UnitClassifications.Contains(UnitClassification.ArmyUnit))
+                    {
+                        unit.Value.UnitRole = UnitRole.Attack;
+                    }
+                }
+            }
+            else
+            {
+                foreach (var unit in ActiveUnitData.Commanders.Where(c => !c.Value.UnitCalculation.Attributes.Contains(SC2APIProtocol.Attribute.Structure)))
+                {
+                    if (unit.Value.UnitCalculation.UnitClassifications.Contains(UnitClassification.ArmyUnit))
+                    {
+                        unit.Value.UnitRole = UnitRole.Defend;
+                    }
+                }
+            }
         }
 
         public override void StartBuild(int frame)
@@ -77,32 +100,46 @@ namespace LokiBot.BuildSequences
             BuildOptions.StrictWorkersPerGasCount = 3;
             BuildOptions.MaxActiveGasCount = 8;
             AttackData.UseAttackDataManager = true;
-
-            foreach (Sharky.UnitTypes Unit in MacroData.Units)
+            BuildStructureWithCallbacks(UnitTypes.TERRAN_SUPPLYDEPOT, null, (object obj) =>
             {
-                MacroData.DesiredUnitCounts[Unit] = 0;
-            }
-            foreach (Sharky.UnitTypes ProductionBuilding in MacroData.Production)
-            {
-                MacroData.DesiredProductionCounts[ProductionBuilding] = 0;
-            }
-            foreach (Sharky.UnitTypes TechBuilding in MacroData.Tech)
-            {
-                MacroData.DesiredTechCounts[TechBuilding] = 0;
-            }
-            foreach (Sharky.UnitTypes DefensiveBuildings in MacroData.DefensiveBuildings)
-            {
-                MacroData.DesiredDefensiveBuildingsCounts[DefensiveBuildings] = 0;
-                MacroData.DesiredDefensiveBuildingsAtDefensivePoint[DefensiveBuildings] = 0;
-                MacroData.DesiredDefensiveBuildingsAtEveryBase[DefensiveBuildings] = 0;
-                MacroData.DesiredDefensiveBuildingsAtNextBase[DefensiveBuildings] = 0;
-                MacroData.DesiredDefensiveBuildingsAtEveryMineralLine[DefensiveBuildings] = 0;
-            }
-            BuildStructure(UnitTypes.TERRAN_COMMANDCENTER);
-            BuildUnits(UnitTypes.TERRAN_SCV, 12);
-
-            BuildUnits(UnitTypes.TERRAN_SCV, 3);
-            BuildStructureWithCallbacks(Sharky.UnitTypes.TERRAN_SUPPLYDEPOT, FirstDepotBuilt, FirstDepotStarted);
+                BuildUnit(UnitTypes.TERRAN_MARINE);
+                BuildStructureWithCallbacks(UnitTypes.TERRAN_FACTORY, null, (object obj) =>
+                {
+                    BuildStructure(UnitTypes.TERRAN_BARRACKSREACTOR);
+                    BuildStructureWithCallbacks(UnitTypes.TERRAN_BARRACKS, null, (object obj) =>
+                    {
+                        BuildStructure(UnitTypes.TERRAN_REFINERY);
+                        BuildStructure(UnitTypes.TERRAN_BARRACKSTECHLAB);
+                        BuildStructureWithCallbacks(UnitTypes.TERRAN_FACTORYTECHLAB, null, (object obj) =>
+                        {
+                            BuildOptions.StrictSupplyCount = false;
+                            BuildStructures(UnitTypes.TERRAN_BUNKER, 2);
+                            BuildStructureWithCallbacks(UnitTypes.TERRAN_STARPORT, (object obj) =>
+                            {
+                                BuildStructure(UnitTypes.TERRAN_STARPORTREACTOR);
+                                BuildUnits(UnitTypes.TERRAN_MEDIVAC, 2);
+                            });
+                            BuildStructureWithCallbacks(UnitTypes.TERRAN_FACTORY, (object obj) =>
+                            {
+                                BuildStructure(UnitTypes.TERRAN_FACTORYTECHLAB);
+                            });
+                            BuildStructuresWithCallbacks(UnitTypes.TERRAN_BARRACKS, 2, (object obj) =>
+                            {
+                                BuildStructure(UnitTypes.TERRAN_BARRACKSREACTOR);
+                                BuildStructure(UnitTypes.TERRAN_BARRACKSTECHLAB);
+                            });
+                            BuildUnits(UnitTypes.TERRAN_MARINE, 70);
+                            BuildUnits(UnitTypes.TERRAN_MARAUDER, 20);
+                            BuildUnitsWithCallback(UnitTypes.TERRAN_SIEGETANK, 6, SiegeTanksBuilt);
+                            BuildUpgrade(Upgrades.STIMPACK);
+                            BuildUpgrade(Upgrades.SHIELDWALL);
+                            BuildStructure(UnitTypes.TERRAN_COMMANDCENTER);
+                            BuildStructure(UnitTypes.TERRAN_ORBITALCOMMAND);
+                            BuildOptions.StrictWorkerCount = false;
+                        });
+                    });
+                });
+            });
         }
 
         public override bool Transition(int frame)
@@ -110,34 +147,7 @@ namespace LokiBot.BuildSequences
             return SequenceDone;
         }
 
-        private void FirstBaracksFinished(object obj)
-        {
-            BuildStructuresWithCallbacks(UnitTypes.TERRAN_ORBITALCOMMAND, 1, null, (object obj) =>
-            {
-                BuildUnits(UnitTypes.TERRAN_SCV, 7);
-            });
-            BuildStructuresWithCallbacks(UnitTypes.TERRAN_ORBITALCOMMAND, 1, null, (object obj) =>
-            {
-                BuildUnits(UnitTypes.TERRAN_SCV, 10);
-            });
-        }
-
-        private void FirstBaracksStarted(object obj)
-        {
-            BuildStructureWithCallbacks(Sharky.UnitTypes.TERRAN_COMMANDCENTER, null, SecondStarted);
-        }
-
-        private void FirstDepotBuilt(object obj)
-        {
-            BuildStructureWithCallbacks(Sharky.UnitTypes.TERRAN_BARRACKS, FirstBaracksFinished, FirstBaracksStarted);
-        }
-
-        private void FirstDepotStarted(object obj)
-        {
-            BuildStructureWithCallbacks(Sharky.UnitTypes.TERRAN_REFINERY, null, ((object obj) => { BuildUnits(UnitTypes.TERRAN_SCV, 4); }));
-        }
-
-        private void SecondStarted(object obj)
+        private void SiegeTanksBuilt(object obj)
         {
             SequenceDone = true;
         }

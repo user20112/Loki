@@ -11,7 +11,7 @@ namespace Sharky.MicroControllers.Protoss
     {
         private float ShadowStrikeRange = 8;
 
-        public DarkTemplarMicroController(Sharky.LokiBot.LokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled)
+        public DarkTemplarMicroController(Sharky.LokiBot.BaseLokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled)
             : base(lokiBot, sharkyPathFinder, microPriority, groupUpEnabled)
         {
         }

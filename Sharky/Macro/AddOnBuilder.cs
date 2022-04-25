@@ -11,7 +11,7 @@ namespace Sharky.Macro
         private SharkyUnitData SharkyUnitData;
         private bool SkipAddons;
 
-        public AddOnBuilder(Sharky.LokiBot.LokiBot lokiBot, IBuildingBuilder buildingBuilder)
+        public AddOnBuilder(Sharky.LokiBot.BaseLokiBot lokiBot, IBuildingBuilder buildingBuilder)
         {
             MacroData = lokiBot.MacroData;
             SharkyUnitData = lokiBot.SharkyUnitData;

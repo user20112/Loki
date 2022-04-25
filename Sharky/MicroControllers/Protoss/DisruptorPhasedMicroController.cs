@@ -10,7 +10,7 @@ namespace Sharky.MicroControllers.Protoss
     {
         private float PurificationNovaSpeed = 5.95f;
 
-        public DisruptorPhasedMicroController(LokiBot.LokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled)
+        public DisruptorPhasedMicroController(LokiBot.BaseLokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled)
             : base(lokiBot, sharkyPathFinder, microPriority, groupUpEnabled)
         {
         }

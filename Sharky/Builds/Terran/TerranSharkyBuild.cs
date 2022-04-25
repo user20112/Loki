@@ -16,8 +16,7 @@ namespace Sharky.Builds.Terran
         private SharkyUnitData SharkyUnitData;
         private TargetingData TargetingData;
 
-        public TerranSharkyBuild(Sharky.LokiBot.LokiBot lokiBot)
-            : base(lokiBot)
+        public TerranSharkyBuild(Sharky.LokiBot.BaseLokiBot lokiBot) : base(lokiBot)
         {
             TargetingData = lokiBot.TargetingData;
             MapDataService = lokiBot.MapDataService;

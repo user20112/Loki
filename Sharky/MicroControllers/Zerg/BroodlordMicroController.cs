@@ -4,7 +4,7 @@ namespace Sharky.MicroControllers.Zerg
 {
     public class BroodlordMicroController : IndividualMicroController
     {
-        public BroodlordMicroController(LokiBot.LokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled)
+        public BroodlordMicroController(LokiBot.BaseLokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled)
             : base(lokiBot, sharkyPathFinder, microPriority, groupUpEnabled)
         {
         }

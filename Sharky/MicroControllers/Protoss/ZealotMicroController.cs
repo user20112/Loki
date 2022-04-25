@@ -6,7 +6,7 @@ namespace Sharky.MicroControllers.Protoss
 {
     public class ZealotMicroController : IndividualMicroController
     {
-        public ZealotMicroController(LokiBot.LokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled)
+        public ZealotMicroController(LokiBot.BaseLokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled)
             : base(lokiBot, sharkyPathFinder, microPriority, groupUpEnabled)
         {
         }

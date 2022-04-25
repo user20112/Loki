@@ -1,16 +1,20 @@
-﻿using SC2APIProtocol;
+﻿using LokiBot.Builds;
+using SC2APIProtocol;
 using Sharky;
-using Sharky.TypeData;
-using System;
+using Sharky.Builds;
 using System.Collections.Generic;
 
-namespace LokiBot.Builds
+namespace LokiBot.BuildSequences
 {
-    public class MarineTankMedivacTvP : BaseBuild
+    public class BasicMidGameSequence : BaseBuild
     {
-        public MarineTankMedivacTvP(Sharky.LokiBot.BaseLokiBot bot) : base(bot)
+        private bool SequenceDone = false;
+
+        public BasicMidGameSequence(Sharky.LokiBot.BaseLokiBot bot) : base(bot)
         {
         }
+
+        public override BuildSegment Segment => BuildSegment.MidGame;
 
         public override List<string> CounterTransition(int frame)
         {
@@ -37,15 +41,6 @@ namespace LokiBot.Builds
         public override void OnFrame(ResponseObservation observation)
         {
             base.OnFrame(observation);
-            int EnemyPlayerFood = 0;
-            TrainingDataService service = new TrainingDataService();
-            Dictionary<UnitTypes, TrainingTypeData> data = service.TrainingData();
-            foreach (KeyValuePair<ulong, UnitCalculation> obj in ActiveUnitData.EnemyUnits)
-            {
-                UnitTypes UnitType = (UnitTypes)obj.Value.Unit.UnitType;
-                if (data.ContainsKey(UnitType))
-                    EnemyPlayerFood += data[UnitType].Food;
-            }
         }
 
         public override void StartBuild(int frame)
@@ -53,12 +48,12 @@ namespace LokiBot.Builds
             MicroTaskData.MicroTasks["DefenseSquadTask"].Enable();
             MicroTaskData.MicroTasks["WorkerScoutGasStealTask"].Disable();
             MicroTaskData.MicroTasks["WorkerScoutTask"].Enable();
-            MicroTaskData.MicroTasks["ReaperScoutTask"].Enable();
+            MicroTaskData.MicroTasks["ReaperScoutTask"].Disable();
             MicroTaskData.MicroTasks["FindHiddenBaseTask"].Disable();
             MicroTaskData.MicroTasks["ProxyScoutTask"].Disable();
             MicroTaskData.MicroTasks["MiningTask"].Enable();
-            MicroTaskData.MicroTasks["AttackTask"].Enable();
-            MicroTaskData.MicroTasks["ReaperWorkerHarassTask"].Enable();
+            MicroTaskData.MicroTasks["AttackTask"].Disable();
+            MicroTaskData.MicroTasks["ReaperWorkerHarassTask"].Disable();
             MicroTaskData.MicroTasks["BansheeHarassTask"].Disable();
             MicroTaskData.MicroTasks["WallOffTask"].Disable();
             MicroTaskData.MicroTasks["PermanentWallOffTask"].Disable();
@@ -68,7 +63,6 @@ namespace LokiBot.Builds
             MicroTaskData.MicroTasks["SaveLiftableBuildingTask"].Enable();
             MicroTaskData.MicroTasks["HellbatMorphTask"].Disable();
             MicroTaskData.MicroTasks["ReaperMiningDefenseTask"].Enable();
-            Console.WriteLine($"{frame} {FrameToTimeConverter.GetTime(frame)} Build: {Name()}");
             StartFrame = frame;
             if (!Started)
             {
@@ -116,7 +110,7 @@ namespace LokiBot.Builds
 
         public override bool Transition(int frame)
         {
-            return base.Transition(frame);
+            return SequenceDone;
         }
 
         private void FirstBaracksFinished(object obj)
@@ -129,7 +123,6 @@ namespace LokiBot.Builds
             {
                 BuildUnits(UnitTypes.TERRAN_SCV, 10);
             });
-            BuildUnit(UnitTypes.TERRAN_REAPER);
         }
 
         private void FirstBaracksStarted(object obj)
@@ -149,45 +142,7 @@ namespace LokiBot.Builds
 
         private void SecondStarted(object obj)
         {
-            BuildStructureWithCallbacks(UnitTypes.TERRAN_SUPPLYDEPOT, null, (object obj) =>
-            {
-                BuildUnit(UnitTypes.TERRAN_MARINE);
-                BuildStructureWithCallbacks(UnitTypes.TERRAN_FACTORY, null, (object obj) =>
-                {
-                    BuildStructure(UnitTypes.TERRAN_BUNKER);
-                    BuildStructure(UnitTypes.TERRAN_BARRACKSREACTOR);
-                    BuildStructureWithCallbacks(UnitTypes.TERRAN_BARRACKS, null, (object obj) =>
-                    {
-                        BuildStructure(UnitTypes.TERRAN_REFINERY);
-                        BuildStructure(UnitTypes.TERRAN_BARRACKSTECHLAB);
-                        BuildStructureWithCallbacks(UnitTypes.TERRAN_FACTORYTECHLAB, null, (object obj) =>
-                        {
-                            BuildOptions.StrictSupplyCount = false;
-                            BuildStructureWithCallbacks(UnitTypes.TERRAN_STARPORT, (object obj) =>
-                            {
-                                BuildStructure(UnitTypes.TERRAN_STARPORTREACTOR);
-                            });
-                            BuildStructureWithCallbacks(UnitTypes.TERRAN_FACTORY, (object obj) =>
-                            {
-                                BuildStructure(UnitTypes.TERRAN_FACTORYTECHLAB);
-                            });
-                            BuildStructuresWithCallbacks(UnitTypes.TERRAN_BARRACKS, 2, (object obj) =>
-                            {
-                                BuildStructure(UnitTypes.TERRAN_BARRACKSREACTOR);
-                                BuildStructure(UnitTypes.TERRAN_BARRACKSTECHLAB);
-                            });
-                            BuildUnits(UnitTypes.TERRAN_MARINE, 50);
-                            BuildUnits(UnitTypes.TERRAN_MARAUDER, 12);
-                            BuildUnits(UnitTypes.TERRAN_SIEGETANK, 5);
-                            BuildUpgrade(Upgrades.STIMPACK);
-                            BuildUpgrade(Upgrades.SHIELDWALL);
-                            BuildStructure(UnitTypes.TERRAN_COMMANDCENTER);
-                            BuildStructure(UnitTypes.TERRAN_ORBITALCOMMAND);
-                            BuildOptions.StrictWorkerCount = false;
-                        });
-                    });
-                });
-            });
+            SequenceDone = true;
         }
     }
 }

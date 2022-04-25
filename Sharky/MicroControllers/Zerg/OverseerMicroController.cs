@@ -7,7 +7,7 @@ namespace Sharky.MicroControllers.Protoss
 {
     public class OverseerMicroController : FlyingDetectorMicroController
     {
-        public OverseerMicroController(LokiBot.LokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled)
+        public OverseerMicroController(LokiBot.BaseLokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled)
             : base(lokiBot, sharkyPathFinder, microPriority, groupUpEnabled)
         {
         }

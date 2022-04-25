@@ -8,7 +8,7 @@ namespace Sharky.MicroControllers.Zerg
 {
     public class ZerglingMicroController : IndividualMicroController
     {
-        public ZerglingMicroController(LokiBot.LokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled)
+        public ZerglingMicroController(LokiBot.BaseLokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled)
             : base(lokiBot, sharkyPathFinder, microPriority, groupUpEnabled)
         {
             AvoidDamageDistance = 5;

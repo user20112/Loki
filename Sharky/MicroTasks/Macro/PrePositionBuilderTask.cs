@@ -11,7 +11,7 @@ namespace Sharky.MicroTasks.Macro
         private int LastSendFrame;
         private SharkyUnitData SharkyUnitData;
 
-        public PrePositionBuilderTask(LokiBot.LokiBot lokiBot, float priority)
+        public PrePositionBuilderTask(LokiBot.BaseLokiBot lokiBot, float priority)
         {
             Enabled = false;
             Priority = priority;

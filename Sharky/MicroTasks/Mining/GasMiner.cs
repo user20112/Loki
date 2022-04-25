@@ -10,7 +10,7 @@ namespace Sharky.MicroTasks.Mining
         private CollisionCalculator CollisionCalculator;
         private SharkyUnitData SharkyUnitData;
 
-        public GasMiner(Sharky.LokiBot.LokiBot lokiBot)
+        public GasMiner(Sharky.LokiBot.BaseLokiBot lokiBot)
         {
             BaseData = lokiBot.BaseData;
             SharkyUnitData = lokiBot.SharkyUnitData;

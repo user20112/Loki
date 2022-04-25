@@ -10,7 +10,7 @@ namespace Sharky.MicroControllers.Terran
     {
         private float Kd8Charge;
 
-        public ReaperMicroController(Sharky.LokiBot.LokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled)
+        public ReaperMicroController(Sharky.LokiBot.BaseLokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled)
             : base(lokiBot, sharkyPathFinder, microPriority, groupUpEnabled)
         {
             AvoidDamageDistance = 5;

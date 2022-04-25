@@ -5,6 +5,8 @@ namespace Sharky.Builds
 {
     public interface ISharkyBuild
     {
+        BuildSegment Segment { get; }
+
         List<string> CounterTransition(int frame);
 
         void EndBuild(int frame);

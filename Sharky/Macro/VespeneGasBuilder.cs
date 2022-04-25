@@ -15,7 +15,7 @@ namespace Sharky.Macro
         private SharkyUnitData SharkyUnitData;
         private TargetingData TargetingData;
 
-        public VespeneGasBuilder(Sharky.LokiBot.LokiBot lokiBot, IBuildingBuilder buildingBuilder)
+        public VespeneGasBuilder(Sharky.LokiBot.BaseLokiBot lokiBot, IBuildingBuilder buildingBuilder)
         {
             MacroData = lokiBot.MacroData;
             ActiveUnitData = lokiBot.ActiveUnitData;

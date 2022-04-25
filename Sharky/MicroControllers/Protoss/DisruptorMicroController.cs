@@ -11,7 +11,7 @@ namespace Sharky.MicroControllers.Protoss
         private int lastPurificationFrame = 0;
         private int PurificationNovaRange = 13;
 
-        public DisruptorMicroController(Sharky.LokiBot.LokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled)
+        public DisruptorMicroController(Sharky.LokiBot.BaseLokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled)
             : base(lokiBot, sharkyPathFinder, microPriority, groupUpEnabled)
         {
         }

@@ -8,7 +8,7 @@ namespace Sharky.MicroControllers
 {
     public class FlyingDetectorMicroController : IndividualMicroController
     {
-        public FlyingDetectorMicroController(Sharky.LokiBot.LokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled)
+        public FlyingDetectorMicroController(Sharky.LokiBot.BaseLokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled)
             : base(lokiBot, sharkyPathFinder, microPriority, groupUpEnabled)
         {
             LooseFormationDistance = 10;

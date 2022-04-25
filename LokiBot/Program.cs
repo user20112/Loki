@@ -32,10 +32,10 @@ namespace LokiBot
 
         private static void Main(string[] args)
         {
-            Console.WriteLine("Starting Clover Bot");
+            Console.WriteLine("Starting Loki Bot");
             var BotGameConnection = new GameConnection();
             var PlayerGameConnection = new GameConnection();
-            var lokiBot = new Sharky.LokiBot.LokiBot(BotGameConnection);
+            var lokiBot = new LokiBot.BotCode.LokiBot(BotGameConnection);
             var terranBuildChoices = new MyBuildChoices(lokiBot);
             lokiBot.BuildChoices[Race.Terran] = terranBuildChoices.BuildChoices;
             var sharkyExampleBot = lokiBot.CreateBot(lokiBot.Managers, lokiBot.DebugService);

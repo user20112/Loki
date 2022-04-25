@@ -10,7 +10,7 @@ namespace Sharky.MicroTasks
     {
         private ActiveUnitData ActiveUnitData;
 
-        public HellbatMorphTask(Sharky.LokiBot.LokiBot lokiBot, bool enabled, float priority)
+        public HellbatMorphTask(Sharky.LokiBot.BaseLokiBot lokiBot, bool enabled, float priority)
         {
             ActiveUnitData = lokiBot.ActiveUnitData;
 

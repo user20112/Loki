@@ -12,7 +12,7 @@ namespace Sharky.Builds.BuildingPlacement
         private BuildOptions BuildOptions;
         private MapDataService MapDataService;
 
-        public ProtossDefensiveGridPlacement(Sharky.LokiBot.LokiBot lokiBot)
+        public ProtossDefensiveGridPlacement(Sharky.LokiBot.BaseLokiBot lokiBot)
         {
             MapDataService = lokiBot.MapDataService;
             BuildingService = lokiBot.BuildingService;

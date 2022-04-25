@@ -56,7 +56,7 @@ namespace Sharky.MicroControllers
             MaximumSupportDistanceSqaured = 225f;
         }
 
-        public IndividualMicroController(Sharky.LokiBot.LokiBot lokiBot, IPathFinder pathFinder, MicroPriority microPriority, bool groupUpEnabled, float avoidDamageDistance = .5f, bool ignoreDistractions = true)
+        public IndividualMicroController(Sharky.LokiBot.BaseLokiBot lokiBot, IPathFinder pathFinder, MicroPriority microPriority, bool groupUpEnabled, float avoidDamageDistance = .5f, bool ignoreDistractions = true)
         {
             MapDataService = lokiBot.MapDataService;
             SharkyUnitData = lokiBot.SharkyUnitData;

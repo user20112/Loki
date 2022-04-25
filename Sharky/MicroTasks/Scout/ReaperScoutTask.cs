@@ -20,7 +20,7 @@ namespace Sharky.MicroTasks
         private TargetingData TargetingData;
         private UnitCountService UnitCountService;
 
-        public ReaperScoutTask(Sharky.LokiBot.LokiBot lokiBot, bool enabled, float priority)
+        public ReaperScoutTask(Sharky.LokiBot.BaseLokiBot lokiBot, bool enabled, float priority)
         {
             TargetingData = lokiBot.TargetingData;
             MapDataService = lokiBot.MapDataService;

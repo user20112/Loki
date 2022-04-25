@@ -13,7 +13,7 @@ namespace Sharky.MicroControllers.Protoss
         private float TImeWarpRadius = 3.5f;
         private int TimeWarpRange = 9;
 
-        public MothershipMicroController(Sharky.LokiBot.LokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled)
+        public MothershipMicroController(Sharky.LokiBot.BaseLokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled)
             : base(lokiBot, sharkyPathFinder, microPriority, groupUpEnabled)
         {
         }

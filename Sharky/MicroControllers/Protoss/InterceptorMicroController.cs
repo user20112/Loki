@@ -6,7 +6,7 @@ namespace Sharky.MicroControllers.Protoss
 {
     public class InterceptorMicroController : IndividualMicroController
     {
-        public InterceptorMicroController(LokiBot.LokiBot lokiBot, IPathFinder pathFinder, MicroPriority microPriority, bool groupUpEnabled)
+        public InterceptorMicroController(LokiBot.BaseLokiBot lokiBot, IPathFinder pathFinder, MicroPriority microPriority, bool groupUpEnabled)
             : base(lokiBot, pathFinder, microPriority, groupUpEnabled)
         {
         }

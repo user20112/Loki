@@ -1,16 +1,22 @@
-﻿using SC2APIProtocol;
+﻿using LokiBot.Builds;
+using SC2APIProtocol;
 using Sharky;
-using Sharky.TypeData;
-using System;
+using Sharky.Builds;
 using System.Collections.Generic;
+using System.Linq;
 
-namespace LokiBot.Builds
+namespace LokiBot.BuildSequences
 {
-    public class MarineTankMedivacTvP : BaseBuild
+    internal class BasicEarlyGameSequence : BaseBuild
     {
-        public MarineTankMedivacTvP(Sharky.LokiBot.BaseLokiBot bot) : base(bot)
+        private bool BuiltAttackForce = false;
+        private bool SequenceDone = false;
+
+        public BasicEarlyGameSequence(Sharky.LokiBot.BaseLokiBot bot) : base(bot)
         {
         }
+
+        public override BuildSegment Segment => BuildSegment.EarlyGame;
 
         public override List<string> CounterTransition(int frame)
         {
@@ -37,14 +43,25 @@ namespace LokiBot.Builds
         public override void OnFrame(ResponseObservation observation)
         {
             base.OnFrame(observation);
-            int EnemyPlayerFood = 0;
-            TrainingDataService service = new TrainingDataService();
-            Dictionary<UnitTypes, TrainingTypeData> data = service.TrainingData();
-            foreach (KeyValuePair<ulong, UnitCalculation> obj in ActiveUnitData.EnemyUnits)
+            if (BuiltAttackForce)
             {
-                UnitTypes UnitType = (UnitTypes)obj.Value.Unit.UnitType;
-                if (data.ContainsKey(UnitType))
-                    EnemyPlayerFood += data[UnitType].Food;
+                foreach (var unit in ActiveUnitData.Commanders.Where(c => !c.Value.UnitCalculation.Attributes.Contains(SC2APIProtocol.Attribute.Structure)))
+                {
+                    if (unit.Value.UnitCalculation.UnitClassifications.Contains(UnitClassification.ArmyUnit))
+                    {
+                        unit.Value.UnitRole = UnitRole.Attack;
+                    }
+                }
+            }
+            else
+            {
+                foreach (var unit in ActiveUnitData.Commanders.Where(c => !c.Value.UnitCalculation.Attributes.Contains(SC2APIProtocol.Attribute.Structure)))
+                {
+                    if (unit.Value.UnitCalculation.UnitClassifications.Contains(UnitClassification.ArmyUnit))
+                    {
+                        unit.Value.UnitRole = UnitRole.Defend;
+                    }
+                }
             }
         }
 
@@ -53,12 +70,12 @@ namespace LokiBot.Builds
             MicroTaskData.MicroTasks["DefenseSquadTask"].Enable();
             MicroTaskData.MicroTasks["WorkerScoutGasStealTask"].Disable();
             MicroTaskData.MicroTasks["WorkerScoutTask"].Enable();
-            MicroTaskData.MicroTasks["ReaperScoutTask"].Enable();
+            MicroTaskData.MicroTasks["ReaperScoutTask"].Disable();
             MicroTaskData.MicroTasks["FindHiddenBaseTask"].Disable();
             MicroTaskData.MicroTasks["ProxyScoutTask"].Disable();
             MicroTaskData.MicroTasks["MiningTask"].Enable();
-            MicroTaskData.MicroTasks["AttackTask"].Enable();
-            MicroTaskData.MicroTasks["ReaperWorkerHarassTask"].Enable();
+            MicroTaskData.MicroTasks["AttackTask"].Disable();
+            MicroTaskData.MicroTasks["ReaperWorkerHarassTask"].Disable();
             MicroTaskData.MicroTasks["BansheeHarassTask"].Disable();
             MicroTaskData.MicroTasks["WallOffTask"].Disable();
             MicroTaskData.MicroTasks["PermanentWallOffTask"].Disable();
@@ -68,7 +85,6 @@ namespace LokiBot.Builds
             MicroTaskData.MicroTasks["SaveLiftableBuildingTask"].Enable();
             MicroTaskData.MicroTasks["HellbatMorphTask"].Disable();
             MicroTaskData.MicroTasks["ReaperMiningDefenseTask"].Enable();
-            Console.WriteLine($"{frame} {FrameToTimeConverter.GetTime(frame)} Build: {Name()}");
             StartFrame = frame;
             if (!Started)
             {
@@ -86,75 +102,11 @@ namespace LokiBot.Builds
             BuildOptions.StrictWorkersPerGasCount = 3;
             BuildOptions.MaxActiveGasCount = 8;
             AttackData.UseAttackDataManager = true;
-
-            foreach (Sharky.UnitTypes Unit in MacroData.Units)
-            {
-                MacroData.DesiredUnitCounts[Unit] = 0;
-            }
-            foreach (Sharky.UnitTypes ProductionBuilding in MacroData.Production)
-            {
-                MacroData.DesiredProductionCounts[ProductionBuilding] = 0;
-            }
-            foreach (Sharky.UnitTypes TechBuilding in MacroData.Tech)
-            {
-                MacroData.DesiredTechCounts[TechBuilding] = 0;
-            }
-            foreach (Sharky.UnitTypes DefensiveBuildings in MacroData.DefensiveBuildings)
-            {
-                MacroData.DesiredDefensiveBuildingsCounts[DefensiveBuildings] = 0;
-                MacroData.DesiredDefensiveBuildingsAtDefensivePoint[DefensiveBuildings] = 0;
-                MacroData.DesiredDefensiveBuildingsAtEveryBase[DefensiveBuildings] = 0;
-                MacroData.DesiredDefensiveBuildingsAtNextBase[DefensiveBuildings] = 0;
-                MacroData.DesiredDefensiveBuildingsAtEveryMineralLine[DefensiveBuildings] = 0;
-            }
-            BuildStructure(UnitTypes.TERRAN_COMMANDCENTER);
-            BuildUnits(UnitTypes.TERRAN_SCV, 12);
-
-            BuildUnits(UnitTypes.TERRAN_SCV, 3);
-            BuildStructureWithCallbacks(Sharky.UnitTypes.TERRAN_SUPPLYDEPOT, FirstDepotBuilt, FirstDepotStarted);
-        }
-
-        public override bool Transition(int frame)
-        {
-            return base.Transition(frame);
-        }
-
-        private void FirstBaracksFinished(object obj)
-        {
-            BuildStructuresWithCallbacks(UnitTypes.TERRAN_ORBITALCOMMAND, 1, null, (object obj) =>
-            {
-                BuildUnits(UnitTypes.TERRAN_SCV, 7);
-            });
-            BuildStructuresWithCallbacks(UnitTypes.TERRAN_ORBITALCOMMAND, 1, null, (object obj) =>
-            {
-                BuildUnits(UnitTypes.TERRAN_SCV, 10);
-            });
-            BuildUnit(UnitTypes.TERRAN_REAPER);
-        }
-
-        private void FirstBaracksStarted(object obj)
-        {
-            BuildStructureWithCallbacks(Sharky.UnitTypes.TERRAN_COMMANDCENTER, null, SecondStarted);
-        }
-
-        private void FirstDepotBuilt(object obj)
-        {
-            BuildStructureWithCallbacks(Sharky.UnitTypes.TERRAN_BARRACKS, FirstBaracksFinished, FirstBaracksStarted);
-        }
-
-        private void FirstDepotStarted(object obj)
-        {
-            BuildStructureWithCallbacks(Sharky.UnitTypes.TERRAN_REFINERY, null, ((object obj) => { BuildUnits(UnitTypes.TERRAN_SCV, 4); }));
-        }
-
-        private void SecondStarted(object obj)
-        {
             BuildStructureWithCallbacks(UnitTypes.TERRAN_SUPPLYDEPOT, null, (object obj) =>
             {
                 BuildUnit(UnitTypes.TERRAN_MARINE);
                 BuildStructureWithCallbacks(UnitTypes.TERRAN_FACTORY, null, (object obj) =>
                 {
-                    BuildStructure(UnitTypes.TERRAN_BUNKER);
                     BuildStructure(UnitTypes.TERRAN_BARRACKSREACTOR);
                     BuildStructureWithCallbacks(UnitTypes.TERRAN_BARRACKS, null, (object obj) =>
                     {
@@ -163,9 +115,11 @@ namespace LokiBot.Builds
                         BuildStructureWithCallbacks(UnitTypes.TERRAN_FACTORYTECHLAB, null, (object obj) =>
                         {
                             BuildOptions.StrictSupplyCount = false;
+                            BuildStructures(UnitTypes.TERRAN_BUNKER, 2);
                             BuildStructureWithCallbacks(UnitTypes.TERRAN_STARPORT, (object obj) =>
                             {
                                 BuildStructure(UnitTypes.TERRAN_STARPORTREACTOR);
+                                BuildUnits(UnitTypes.TERRAN_MEDIVAC, 2);
                             });
                             BuildStructureWithCallbacks(UnitTypes.TERRAN_FACTORY, (object obj) =>
                             {
@@ -176,9 +130,10 @@ namespace LokiBot.Builds
                                 BuildStructure(UnitTypes.TERRAN_BARRACKSREACTOR);
                                 BuildStructure(UnitTypes.TERRAN_BARRACKSTECHLAB);
                             });
-                            BuildUnits(UnitTypes.TERRAN_MARINE, 50);
-                            BuildUnits(UnitTypes.TERRAN_MARAUDER, 12);
-                            BuildUnits(UnitTypes.TERRAN_SIEGETANK, 5);
+                            BuildUnits(UnitTypes.TERRAN_MARINE, 70);
+                            BuildUnits(UnitTypes.TERRAN_MARAUDER, 20);
+                            BuildUnitsWithCallback(UnitTypes.TERRAN_SIEGETANK, 4, (obj) => { BuiltAttackForce = true; });
+                            BuildUnitsWithCallback(UnitTypes.TERRAN_SIEGETANK, 2, SiegeTanksBuilt);
                             BuildUpgrade(Upgrades.STIMPACK);
                             BuildUpgrade(Upgrades.SHIELDWALL);
                             BuildStructure(UnitTypes.TERRAN_COMMANDCENTER);
@@ -188,6 +143,16 @@ namespace LokiBot.Builds
                     });
                 });
             });
+        }
+
+        public override bool Transition(int frame)
+        {
+            return SequenceDone;
+        }
+
+        private void SiegeTanksBuilt(object obj)
+        {
+            SequenceDone = true;
         }
     }
 }

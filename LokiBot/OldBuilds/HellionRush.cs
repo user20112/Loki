@@ -10,7 +10,7 @@ namespace LokiBot.Builds
     {
         private ExpandForever ExpandForever;
 
-        public HellionRush(Sharky.LokiBot.LokiBot lokiBot) : base(lokiBot)
+        public HellionRush(Sharky.LokiBot.BaseLokiBot lokiBot) : base(lokiBot)
         {
             ExpandForever = new ExpandForever(lokiBot);
         }

@@ -11,7 +11,7 @@ namespace Sharky.MicroControllers.Zerg
         private int lastBlindingCloudFrame = 0;
         private int lastParasiticBombFrame = 0;
 
-        public ViperMicroController(LokiBot.LokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled)
+        public ViperMicroController(LokiBot.BaseLokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled)
             : base(lokiBot, sharkyPathFinder, microPriority, groupUpEnabled)
         {
         }

@@ -10,7 +10,7 @@ namespace Sharky.Macro
         private Morpher Morpher;
         private SharkyUnitData SharkyUnitData;
 
-        public BuildingMorpher(Sharky.LokiBot.LokiBot lokiBot)
+        public BuildingMorpher(Sharky.LokiBot.BaseLokiBot lokiBot)
         {
             MacroData = lokiBot.MacroData;
             SharkyUnitData = lokiBot.SharkyUnitData;

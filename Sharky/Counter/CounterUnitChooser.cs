@@ -9,7 +9,7 @@ namespace Sharky.Counter
     {
         private CounterInfoService CounterInfoService;
 
-        public CounterUnitChooser(Sharky.LokiBot.LokiBot lokiBot, CounterInfoService counterInfoService)
+        public CounterUnitChooser(Sharky.LokiBot.BaseLokiBot lokiBot, CounterInfoService counterInfoService)
         {
             CounterInfoService = counterInfoService;
         }

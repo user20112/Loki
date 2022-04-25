@@ -12,7 +12,7 @@ namespace Sharky.MicroTasks.Mining
         private UnitCalculation EnemyReaper;
         private MineralWalker MineralWalker;
 
-        public ReaperMiningDefenseTask(Sharky.LokiBot.LokiBot lokiBot, bool enabled, float priority)
+        public ReaperMiningDefenseTask(Sharky.LokiBot.BaseLokiBot lokiBot, bool enabled, float priority)
         {
             ActiveUnitData = lokiBot.ActiveUnitData;
             EnemyData = lokiBot.EnemyData;

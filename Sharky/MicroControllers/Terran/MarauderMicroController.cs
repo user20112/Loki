@@ -7,7 +7,7 @@ namespace Sharky.MicroControllers.Terran
 {
     public class MarauderMicroController : IndividualMicroController
     {
-        public MarauderMicroController(LokiBot.LokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled)
+        public MarauderMicroController(LokiBot.BaseLokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled)
             : base(lokiBot, sharkyPathFinder, microPriority, groupUpEnabled)
         {
         }

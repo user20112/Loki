@@ -13,7 +13,7 @@ namespace Sharky.MicroTasks
         private EnemyData EnemyData;
         private UnitCountService UnitCountService;
 
-        public SaveLiftableBuildingTask(LokiBot.LokiBot lokiBot, IBuildingPlacement buildingPlacement, float priority, bool enabled = true)
+        public SaveLiftableBuildingTask(LokiBot.BaseLokiBot lokiBot, IBuildingPlacement buildingPlacement, float priority, bool enabled = true)
         {
             EnemyData = lokiBot.EnemyData;
             BaseData = lokiBot.BaseData;

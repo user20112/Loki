@@ -20,7 +20,7 @@ namespace Sharky.Builds
         private UnitCountService UnitCountService;
         private WorkerBuilderService WorkerBuilderService;
 
-        public SimCityService(Sharky.LokiBot.LokiBot lokiBot)
+        public SimCityService(Sharky.LokiBot.BaseLokiBot lokiBot)
         {
             MacroData = lokiBot.MacroData;
             BaseData = lokiBot.BaseData;

@@ -7,7 +7,7 @@ namespace Sharky.MicroControllers.Terran
 {
     internal class BansheeMicroController : IndividualMicroController
     {
-        public BansheeMicroController(LokiBot.LokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled)
+        public BansheeMicroController(LokiBot.BaseLokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled)
             : base(lokiBot, sharkyPathFinder, microPriority, groupUpEnabled, 2)
         {
         }

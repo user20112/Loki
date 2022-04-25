@@ -7,7 +7,7 @@ namespace LokiBot.Builds.BuildServices
         private MacroData MacroData;
         private UnitCountService UnitCountService;
 
-        public ExpandForever(Sharky.LokiBot.LokiBot lokiBot)
+        public ExpandForever(Sharky.LokiBot.BaseLokiBot lokiBot)
         {
             UnitCountService = lokiBot.UnitCountService;
             MacroData = lokiBot.MacroData;

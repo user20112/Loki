@@ -6,7 +6,7 @@ namespace Sharky.Builds
 {
     public class BuildNothing : SharkyBuild
     {
-        public BuildNothing(Sharky.LokiBot.LokiBot lokiBot) : base(lokiBot)
+        public BuildNothing(Sharky.LokiBot.BaseLokiBot lokiBot) : base(lokiBot)
         {
         }
 

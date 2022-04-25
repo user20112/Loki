@@ -12,7 +12,7 @@ namespace Sharky.Builds.BuildingPlacement
         private SharkyUnitData SharkyUnitData;
         private TargetingData TargetingData;
 
-        public WallService(Sharky.LokiBot.LokiBot lokiBot)
+        public WallService(Sharky.LokiBot.BaseLokiBot lokiBot)
         {
             ActiveUnitData = lokiBot.ActiveUnitData;
             BuildingService = lokiBot.BuildingService;

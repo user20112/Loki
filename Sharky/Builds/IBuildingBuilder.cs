@@ -13,5 +13,7 @@ namespace Sharky.Builds
         List<Action> BuildGas(MacroData macroData, BuildingTypeData unitData, Unit geyser);
 
         Point2D GetReferenceLocation(Point2D buildLocation);
+
+        List<Action> ResumeStructure(KeyValuePair<ulong, UnitCommander> structure, MacroData macroData);
     }
 }

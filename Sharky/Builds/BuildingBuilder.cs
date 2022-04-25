@@ -181,6 +181,17 @@ namespace Sharky.Builds
             return buildLocation;
         }
 
+        public List<Action> ResumeStructure(KeyValuePair<ulong, UnitCommander> structure, MacroData macroData)
+        {
+            var worker = WorkerBuilderService.GetWorker(new Point2D { X = structure.Value.UnitCalculation.Unit.Pos.X, Y = structure.Value.UnitCalculation.Unit.Pos.Y });
+            if (worker != null)
+            {
+                worker.UnitRole = UnitRole.Build;
+                return worker.Order(macroData.Frame, Abilities.SMART, new Point2D() { X = structure.Value.UnitCalculation.Unit.Pos.X, Y = structure.Value.UnitCalculation.Unit.Pos.Y });
+            }
+            return null;
+        }
+
         private bool HasRoomForAddon(UnitCommander building)
         {
             var addonY = building.UnitCalculation.Unit.Pos.Y - .5f;

@@ -12,7 +12,7 @@ namespace Sharky.MicroControllers.Zerg
         private int LastManualDetonationFrame;
         private float SplashRadius;
 
-        public BanelingMicroController(LokiBot.LokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled)
+        public BanelingMicroController(LokiBot.BaseLokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled)
             : base(lokiBot, sharkyPathFinder, microPriority, groupUpEnabled)
         {
             EnemyData = lokiBot.EnemyData;

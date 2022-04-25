@@ -10,7 +10,7 @@ namespace LokiBot
 {
     public class TerranBuildChoices
     {
-        public TerranBuildChoices(Sharky.LokiBot.LokiBot lokiBot)
+        public TerranBuildChoices(Sharky.LokiBot.BaseLokiBot lokiBot)
         {
             var hellionRush = new HellionRush(lokiBot);
             var massVikings = new MassVikings(lokiBot);
@@ -64,7 +64,7 @@ namespace LokiBot
 
         public BuildChoices BuildChoices { get; private set; }
 
-        private void AddTerranTasks(Sharky.LokiBot.LokiBot lokiBot)
+        private void AddTerranTasks(Sharky.LokiBot.BaseLokiBot lokiBot)
         {
             var vikingDropTask = new VikingDropTask(lokiBot, .5f, false);
             lokiBot.MicroTaskData.MicroTasks[vikingDropTask.GetType().Name] = vikingDropTask;

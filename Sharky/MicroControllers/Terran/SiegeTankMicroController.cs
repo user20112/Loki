@@ -8,7 +8,7 @@ namespace Sharky.MicroControllers.Terran
 {
     public class SiegeTankMicroController : IndividualMicroController
     {
-        public SiegeTankMicroController(LokiBot.LokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled)
+        public SiegeTankMicroController(LokiBot.BaseLokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled)
             : base(lokiBot, sharkyPathFinder, microPriority, groupUpEnabled)
         {
         }

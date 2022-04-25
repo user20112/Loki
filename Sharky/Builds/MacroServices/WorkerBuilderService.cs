@@ -10,7 +10,7 @@ namespace Sharky.Builds.MacroServices
         private ActiveUnitData ActiveUnitData;
         private SharkyUnitData SharkyUnitData;
 
-        public WorkerBuilderService(Sharky.LokiBot.LokiBot lokiBot)
+        public WorkerBuilderService(Sharky.LokiBot.BaseLokiBot lokiBot)
         {
             ActiveUnitData = lokiBot.ActiveUnitData;
             SharkyUnitData = lokiBot.SharkyUnitData;

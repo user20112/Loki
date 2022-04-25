@@ -9,7 +9,7 @@ namespace Sharky.MicroControllers.Protoss
 {
     public class PhoenixMicroController : IndividualMicroController
     {
-        public PhoenixMicroController(Sharky.LokiBot.LokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled)
+        public PhoenixMicroController(Sharky.LokiBot.BaseLokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled)
             : base(lokiBot, sharkyPathFinder, microPriority, groupUpEnabled)
         {
         }

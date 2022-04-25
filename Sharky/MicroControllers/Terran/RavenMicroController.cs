@@ -8,7 +8,7 @@ namespace Sharky.MicroControllers.Terran
 {
     public class RavenMicroController : FlyingDetectorMicroController
     {
-        public RavenMicroController(LokiBot.LokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled)
+        public RavenMicroController(LokiBot.BaseLokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled)
             : base(lokiBot, sharkyPathFinder, microPriority, groupUpEnabled)
         {
         }

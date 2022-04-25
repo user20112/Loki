@@ -10,7 +10,7 @@ namespace Sharky.MicroControllers.Terran
     {
         private int LastLockOnFrame;
 
-        public CycloneMicroController(LokiBot.LokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled)
+        public CycloneMicroController(LokiBot.BaseLokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled)
             : base(lokiBot, sharkyPathFinder, microPriority, groupUpEnabled)
         {
             AvoidDamageDistance = 2f; // TODO: may need to turn off autolock on

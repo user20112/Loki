@@ -32,7 +32,7 @@ using System.Net.Http;
 
 namespace Sharky.LokiBot
 {
-    public class LokiBot
+    public class BaseLokiBot
     {
         public SharkyOptions SharkyOptions { get; set; }
         public FrameToTimeConverter FrameToTimeConverter { get; set; }
@@ -56,7 +56,7 @@ namespace Sharky.LokiBot
         public ChatManager ChatManager { get; set; }
         public MicroManager MicroManager { get; set; }
         public EnemyStrategyManager EnemyStrategyManager { get; set; }
-        public BuildManager BuildManager { get; set; }
+        public SharkyManager BuildManager { get; set; }
         public AttackDataManager AttackDataManager { get; set; }
 
         public VespeneGasBuilder VespeneGasBuilder { get; set; }
@@ -155,7 +155,7 @@ namespace Sharky.LokiBot
         public SharkyUnitData SharkyUnitData { get; set; }
         public MineralWalker MineralWalker { get; set; }
 
-        public LokiBot(GameConnection gameConnection)
+        public BaseLokiBot(GameConnection gameConnection, bool UseDefaultBuildManager)
         {
             var debug = false;
 #if DEBUG
@@ -525,8 +525,11 @@ namespace Sharky.LokiBot
             BuildMatcher = new BuildMatcher();
             RecordService = new RecordService(BuildMatcher);
             BuildDecisionService = new RecentBuildDecisionService(ChatService, EnemyPlayerService, RecordService, BuildMatcher);
-            BuildManager = new BuildManager(BuildChoices, DebugService, MacroBalancer, BuildDecisionService, EnemyPlayerService, ChatHistory, EnemyStrategyHistory, FrameToTimeConverter, SharkyOptions, ChatService, SimCityService);
-            Managers.Add(BuildManager);
+            if (UseDefaultBuildManager)
+            {
+                BuildManager = new BuildManager(BuildChoices, DebugService, MacroBalancer, BuildDecisionService, EnemyPlayerService, ChatHistory, EnemyStrategyHistory, FrameToTimeConverter, SharkyOptions, ChatService, SimCityService);
+                Managers.Add(BuildManager);
+            }
         }
 
         public SharkyBot CreateBot(List<IManager> managers, DebugService debugService)

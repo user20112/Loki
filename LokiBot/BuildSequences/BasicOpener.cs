@@ -1,5 +1,6 @@
 ﻿using SC2APIProtocol;
 using Sharky;
+using Sharky.Builds;
 using System.Collections.Generic;
 
 namespace LokiBot.Builds
@@ -8,9 +9,11 @@ namespace LokiBot.Builds
     {
         private bool SequenceDone = false;
 
-        public BasicOpener(Sharky.LokiBot.LokiBot bot) : base(bot)
+        public BasicOpener(Sharky.LokiBot.BaseLokiBot bot) : base(bot)
         {
         }
+
+        public override BuildSegment Segment => BuildSegment.Opener;
 
         public override List<string> CounterTransition(int frame)
         {

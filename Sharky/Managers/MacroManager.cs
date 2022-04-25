@@ -26,7 +26,7 @@ namespace Sharky.Managers
         private UpgradeResearcher UpgradeResearcher;
         private VespeneGasBuilder VespeneGasBuilder;
 
-        public MacroManager(LokiBot.LokiBot lokiBot)
+        public MacroManager(LokiBot.BaseLokiBot lokiBot)
         {
             MacroSetup = lokiBot.MacroSetup;
             MacroData = lokiBot.MacroData;
@@ -76,6 +76,7 @@ namespace Sharky.Managers
             actions.AddRange(BuildProxyService.BuildPylons());
             actions.AddRange(BuildProxyService.MorphBuildings());
             actions.AddRange(BuildProxyService.BuildAddOns());
+            actions.AddRange(BuildProxyService.ResumePausedBuilds());
             actions.AddRange(BuildProxyService.BuildDefensiveBuildings());
             actions.AddRange(BuildProxyService.BuildProductionBuildings());
             actions.AddRange(BuildProxyService.BuildTechBuildings());

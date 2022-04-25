@@ -21,7 +21,7 @@ namespace Sharky.MicroTasks
         private MineralMiner MineralMiner;
         private SharkyUnitData SharkyUnitData;
 
-        public MiningTask(Sharky.LokiBot.LokiBot lokiBot, float priority, MiningDefenseService miningDefenseService, MineralMiner mineralMiner, GasMiner gasMiner)
+        public MiningTask(Sharky.LokiBot.BaseLokiBot lokiBot, float priority, MiningDefenseService miningDefenseService, MineralMiner mineralMiner, GasMiner gasMiner)
         {
             SharkyUnitData = lokiBot.SharkyUnitData;
             BaseData = lokiBot.BaseData;

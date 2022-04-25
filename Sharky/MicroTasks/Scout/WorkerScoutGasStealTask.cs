@@ -25,7 +25,7 @@ namespace Sharky.MicroTasks
         private SharkyUnitData SharkyUnitData;
         private TargetingData TargetingData;
 
-        public WorkerScoutGasStealTask(Sharky.LokiBot.LokiBot lokiBot, bool enabled, float priority)
+        public WorkerScoutGasStealTask(Sharky.LokiBot.BaseLokiBot lokiBot, bool enabled, float priority)
         {
             SharkyUnitData = lokiBot.SharkyUnitData;
             TargetingData = lokiBot.TargetingData;

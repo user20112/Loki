@@ -8,7 +8,7 @@ namespace Sharky.MicroControllers.Protoss
 {
     public class VoidRayMicroController : IndividualMicroController
     {
-        public VoidRayMicroController(LokiBot.LokiBot lokiBot, IPathFinder pathFinder, MicroPriority microPriority, bool groupUpEnabled)
+        public VoidRayMicroController(LokiBot.BaseLokiBot lokiBot, IPathFinder pathFinder, MicroPriority microPriority, bool groupUpEnabled)
             : base(lokiBot, pathFinder, microPriority, groupUpEnabled)
         {
             MaximumSupportDistanceSqaured = 25f;

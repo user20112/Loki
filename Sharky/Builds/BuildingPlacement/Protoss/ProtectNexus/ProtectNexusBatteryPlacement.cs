@@ -10,7 +10,7 @@ namespace Sharky.Builds.BuildingPlacement
         private BaseData BaseData;
         private BuildingService BuildingService;
 
-        public ProtectNexusBatteryPlacement(Sharky.LokiBot.LokiBot lokiBot)
+        public ProtectNexusBatteryPlacement(Sharky.LokiBot.BaseLokiBot lokiBot)
         {
             BaseData = lokiBot.BaseData;
             BuildingService = lokiBot.BuildingService;

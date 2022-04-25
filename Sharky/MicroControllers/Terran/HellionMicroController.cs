@@ -10,7 +10,7 @@ namespace Sharky.MicroControllers.Terran
     {
         private CollisionCalculator CollisionCalculator;
 
-        public HellionMicroController(LokiBot.LokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled)
+        public HellionMicroController(LokiBot.BaseLokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled)
             : base(lokiBot, sharkyPathFinder, microPriority, groupUpEnabled)
         {
             CollisionCalculator = lokiBot.CollisionCalculator;

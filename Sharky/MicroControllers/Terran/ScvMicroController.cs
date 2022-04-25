@@ -10,7 +10,7 @@ namespace Sharky.MicroControllers.Terran
     {
         private MacroData MacroData;
 
-        public ScvMicroController(LokiBot.LokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled)
+        public ScvMicroController(LokiBot.BaseLokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled)
             : base(lokiBot, sharkyPathFinder, microPriority, groupUpEnabled)
         {
             MacroData = lokiBot.MacroData;

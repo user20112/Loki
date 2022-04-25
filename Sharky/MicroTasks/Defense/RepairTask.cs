@@ -18,7 +18,7 @@ namespace Sharky.MicroTasks
         private SharkyUnitData SharkyUnitData;
         private TargetingData TargetingData;
 
-        public RepairTask(LokiBot.LokiBot lokiBot, float priority, bool enabled = true)
+        public RepairTask(LokiBot.BaseLokiBot lokiBot, float priority, bool enabled = true)
         {
             ActiveUnitData = lokiBot.ActiveUnitData;
             MacroData = lokiBot.MacroData;

@@ -12,7 +12,7 @@ namespace Sharky.Macro
         private SharkyUnitData SharkyUnitData;
         private bool SkipSupply;
 
-        public SupplyBuilder(Sharky.LokiBot.LokiBot lokiBot, IBuildingBuilder buildingBuilder)
+        public SupplyBuilder(Sharky.LokiBot.BaseLokiBot lokiBot, IBuildingBuilder buildingBuilder)
         {
             MacroData = lokiBot.MacroData;
             SharkyUnitData = lokiBot.SharkyUnitData;

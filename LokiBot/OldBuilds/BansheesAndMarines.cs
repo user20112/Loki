@@ -13,7 +13,7 @@ namespace LokiBot.Builds
         private bool Scouted;
         private WorkerScoutTask WorkerScoutTask;
 
-        public BansheesAndMarines(Sharky.LokiBot.LokiBot lokiBot) : base(lokiBot)
+        public BansheesAndMarines(Sharky.LokiBot.BaseLokiBot lokiBot) : base(lokiBot)
         {
             ExpandForever = new ExpandForever(lokiBot);
         }

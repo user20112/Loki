@@ -6,7 +6,7 @@ namespace Sharky.Counter
     {
         private UnitCountService UnitCountService;
 
-        public CounterUnitChoiceService(Sharky.LokiBot.LokiBot lokiBot)
+        public CounterUnitChoiceService(Sharky.LokiBot.BaseLokiBot lokiBot)
         {
             UnitCountService = lokiBot.UnitCountService;
         }

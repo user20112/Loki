@@ -20,7 +20,7 @@ namespace Sharky.MicroTasks.Attack
         private TargetingService TargetingService;
         private TerranWallService TerranWallService;
 
-        public ArmySplitter(LokiBot.LokiBot lokiBot)
+        public ArmySplitter(LokiBot.BaseLokiBot lokiBot)
         {
             AttackData = lokiBot.AttackData;
             TargetingData = lokiBot.TargetingData;

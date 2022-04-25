@@ -11,7 +11,7 @@ namespace Sharky.Macro
         private MacroData MacroData;
         private SharkyUnitData SharkyUnitData;
 
-        public UnfinishedBuildingCompleter(Sharky.LokiBot.LokiBot lokiBot)
+        public UnfinishedBuildingCompleter(Sharky.LokiBot.BaseLokiBot lokiBot)
         {
             ActiveUnitData = lokiBot.ActiveUnitData;
             SharkyUnitData = lokiBot.SharkyUnitData;

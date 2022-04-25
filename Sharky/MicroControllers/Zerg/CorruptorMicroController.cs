@@ -7,7 +7,7 @@ namespace Sharky.MicroControllers.Zerg
 {
     public class CorruptorMicroController : IndividualMicroController
     {
-        public CorruptorMicroController(LokiBot.LokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled)
+        public CorruptorMicroController(LokiBot.BaseLokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled)
             : base(lokiBot, sharkyPathFinder, microPriority, groupUpEnabled)
         {
         }

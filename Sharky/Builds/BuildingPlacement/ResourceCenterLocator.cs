@@ -12,7 +12,7 @@ namespace Sharky.Builds.BuildingPlacement
         private BuildOptions BuildOptions;
         private TargetingData TargetingData;
 
-        public ResourceCenterLocator(Sharky.LokiBot.LokiBot lokiBot)
+        public ResourceCenterLocator(Sharky.LokiBot.BaseLokiBot lokiBot)
         {
             ActiveUnitData = lokiBot.ActiveUnitData;
             BaseData = lokiBot.BaseData;

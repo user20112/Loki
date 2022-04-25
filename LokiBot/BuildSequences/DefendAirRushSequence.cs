@@ -6,15 +6,15 @@ using System.Collections.Generic;
 
 namespace LokiBot.BuildSequences
 {
-    public class BattlecruiserRushSequence : BaseBuild
+    internal class DefendAirRushSequence : BaseBuild
     {
         private bool SequenceDone = false;
 
-        public BattlecruiserRushSequence(Sharky.LokiBot.BaseLokiBot bot) : base(bot)
+        public DefendAirRushSequence(Sharky.LokiBot.BaseLokiBot bot) : base(bot)
         {
         }
 
-        public override BuildSegment Segment => BuildSegment.MidGame;
+        public override BuildSegment Segment => BuildSegment.EarlyGame;
 
         public override List<string> CounterTransition(int frame)
         {

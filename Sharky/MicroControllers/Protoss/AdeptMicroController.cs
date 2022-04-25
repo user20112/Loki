@@ -7,7 +7,7 @@ namespace Sharky.MicroControllers.Protoss
 {
     public class AdeptMicroController : IndividualMicroController
     {
-        public AdeptMicroController(Sharky.LokiBot.LokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled)
+        public AdeptMicroController(Sharky.LokiBot.BaseLokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled)
             : base(lokiBot, sharkyPathFinder, microPriority, groupUpEnabled)
         {
             AvoidDamageDistance = 2;

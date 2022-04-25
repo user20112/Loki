@@ -12,7 +12,7 @@ namespace LokiBot.MicroTasks
         private BaseData BaseData;
         private TargetingData TargetingData;
 
-        public VikingDropTask(Sharky.LokiBot.LokiBot lokiBot, float priority, bool enabled = true)
+        public VikingDropTask(Sharky.LokiBot.BaseLokiBot lokiBot, float priority, bool enabled = true)
         {
             BaseData = lokiBot.BaseData;
             ActiveUnitData = lokiBot.ActiveUnitData;

@@ -9,7 +9,7 @@ namespace Sharky.Builds.Terran
         private bool Scouted;
         private WorkerScoutTask WorkerScoutTask;
 
-        public EveryTerranUnit(Sharky.LokiBot.LokiBot lokiBot) : base(lokiBot)
+        public EveryTerranUnit(Sharky.LokiBot.BaseLokiBot lokiBot) : base(lokiBot)
         {
             Scouted = false;
         }

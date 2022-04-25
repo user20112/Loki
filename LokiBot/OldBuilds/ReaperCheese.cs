@@ -14,7 +14,7 @@ namespace LokiBot.Builds
         private ProxyLocationService ProxyLocationService;
         private ProxyTask ProxyTask;
 
-        public ReaperCheese(Sharky.LokiBot.LokiBot lokiBot, IIndividualMicroController scvMicroController) : base(lokiBot)
+        public ReaperCheese(Sharky.LokiBot.BaseLokiBot lokiBot, IIndividualMicroController scvMicroController) : base(lokiBot)
         {
             ProxyLocationService = lokiBot.ProxyLocationService;
 

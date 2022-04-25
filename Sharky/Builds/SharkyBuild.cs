@@ -21,7 +21,7 @@ namespace Sharky.Builds
         protected int StartFrame;
         protected UnitCountService UnitCountService;
 
-        public SharkyBuild(Sharky.LokiBot.LokiBot lokiBot)
+        public SharkyBuild(Sharky.LokiBot.BaseLokiBot lokiBot)
         {
             BuildOptions = lokiBot.BuildOptions;
             SharkyOptions = lokiBot.SharkyOptions;
@@ -60,6 +60,8 @@ namespace Sharky.Builds
                 PrePositionBuilderTask = (PrePositionBuilderTask)microTaskData.MicroTasks["PrePositionBuilderTask"];
             }
         }
+
+        public virtual BuildSegment Segment { get; }
 
         public virtual List<string> CounterTransition(int frame)
         {

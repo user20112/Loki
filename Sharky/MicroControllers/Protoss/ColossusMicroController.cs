@@ -11,7 +11,7 @@ namespace Sharky.MicroControllers.Protoss
     {
         private CollisionCalculator CollisionCalculator;
 
-        public ColossusMicroController(Sharky.LokiBot.LokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled)
+        public ColossusMicroController(Sharky.LokiBot.BaseLokiBot lokiBot, IPathFinder sharkyPathFinder, MicroPriority microPriority, bool groupUpEnabled)
             : base(lokiBot, sharkyPathFinder, microPriority, groupUpEnabled)
         {
             CollisionCalculator = lokiBot.CollisionCalculator;
